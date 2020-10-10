@@ -44,6 +44,7 @@ export class CountdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() config: CountdownConfig;
   @Input() render: TemplateRef<void>;
   @Output() readonly event = new EventEmitter<CountdownEvent>();
+  @Output() ticker = new EventEmitter<number>();
 
   constructor(
     @Inject(LOCALE_ID) private locale: string,
@@ -51,7 +52,7 @@ export class CountdownComponent implements OnInit, OnChanges, OnDestroy {
     private defCog: CountdownGlobalConfig,
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone,
-  ) {}
+  ) { }
 
   /**
    * Start countdown, you must manually call when `demand: false`
@@ -163,6 +164,7 @@ export class CountdownComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     const value = (this.left = this.left - this.frequency * count);
+    this.ticker.emit(value);
     this.i = {
       value,
       text: config.formatDate({ date: value, formatStr: config.format, timezone: config.timezone }),

@@ -21,6 +21,7 @@
   },
   "homepage": "https://cipchk.github.io/ngx-countdown/",
   "scripts": {
+    "prepare": "npm run build",
     "analyze": "ng build --prod --stats-json",
     "lint": "tslint -p tsconfig.json -c tslint.json 'lib/*/*.ts'",
     "test": "ng test --no-progress --browsers=ChromeHeadlessCI --code-coverage --no-watch",
@@ -28,6 +29,9 @@
     "release:next": "npm run build && cd publish && npm publish --access public --tag next",
     "release": "npm run build && cd publish && npm publish --access public"
   },
+  "files": [
+    "publish/"
+  ],
   "dependencies": {
     "@angular/animations": "~10.0.0",
     "@angular/common": "~10.0.0",
